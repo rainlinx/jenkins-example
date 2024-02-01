@@ -29,7 +29,7 @@ pipeline {
                 def buildNumber = build.number
                 def buildStatus = build.currentResult
                 def duration = build.duration
-                def log = build.rowBuild.getLog()
+                def log = build.rawBuild.getLog()
         
                 httpRequest url: targetUrl, contentType: 'APPLICATION_JSON', httpMode: 'GET', responseHandle: 'NONE', timeout: 30, requestBody: """
                 {
