@@ -28,6 +28,8 @@ pipeline {
                 def projectName = build.projectName
                 def buildNumber = build.number
                 def buildStatus = build.currentResult
+                def duration = build.duration
+                def log = build.rowBuild.getLog()
         
                 httpRequest url: targetUrl, contentType: 'APPLICATION_JSON', httpMode: 'GET', responseHandle: 'NONE', timeout: 30, requestBody: """
                 {
@@ -35,8 +37,10 @@ pipeline {
                     "build": {
                         "full_url": "${buildUrl}",
                         "number": "${buildNumber}",
+                        "duration": "${duration}"
                         "phase": "FINISHED",
-                        "status": "${buildStatus}"
+                        "status": "${buildStatus}",
+                        "log": "${log}"
                     }
                 }
                 """
